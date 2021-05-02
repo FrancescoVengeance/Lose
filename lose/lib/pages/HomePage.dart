@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:lose/widgets/MealCard.dart';
 
 class HomePage extends StatefulWidget
 {
@@ -24,7 +25,20 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       drawer: _buildSideDrawer(context),
       appBar: AppBar(title: Text('Lose'),),
-      body: Container(child: Center(child: Text('Lose'),),),
+      body: ListView.builder(
+          itemBuilder: (BuildContext context, int index)
+          {
+            return MealCard();
+          },
+          itemCount: 5,
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          //TODO
+        },
+      ),
     );
   }
 
