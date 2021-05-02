@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added MealCard.dart">
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name">
+      <change afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619520760602</updated>
       <workItem from="1619520768068" duration="638000" />
-      <workItem from="1619972856075" duration="12850000" />
+      <workItem from="1619972856075" duration="19298000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -86,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619977924260</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name">
+      <created>1619986005351</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619986005351</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,6 +119,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added MealCard.dart" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added MealCard.dart" />
+    <MESSAGE value="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name" />
   </component>
 </project>

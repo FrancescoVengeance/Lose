@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lose/pages/HomePage.dart';
+import 'package:lose/scoped_models/AppDataModel.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 
 void main()
@@ -27,16 +29,19 @@ class _MyAppState extends State<MyApp>
   @override
   Widget build(BuildContext context)
   {
-    return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch:  Colors.blue,
-        accentColor: Colors.blueAccent,
-        buttonColor: Colors.lightBlue,
+    return ScopedModel<AppDataModel>(
+      model: AppDataModel(),
+      child: MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primarySwatch:  Colors.blue,
+          accentColor: Colors.blueAccent,
+          buttonColor: Colors.lightBlue,
+        ),
+        routes: {
+          '/' : (BuildContext context) => HomePage(),
+        },
       ),
-      routes: {
-        '/' : (BuildContext context) => HomePage(),
-      },
     );
   }
 }

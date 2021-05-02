@@ -1,61 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:lose/models/Food.dart';
+import 'package:lose/models/Meal.dart';
+import 'package:lose/scoped_models/AppDataModel.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class MealCard extends StatelessWidget
 {
-  final Function deleteCard;
+  Meal _meal;
+  final int _mealIndex;
 
-  MealCard(this.deleteCard);
+  MealCard(this._meal, this._mealIndex);
 
   @override
   Widget build(BuildContext context)
   {
-    return Card(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 3),
-            padding: EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+    return ScopedModelDescendant<AppDataModel>(
+        builder: (BuildContext context, Widget child, AppDataModel model)
+        {
+          return Card(
+            child: Column(
               children: [
-                Text('Pranzo',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 3),
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(_meal.mealType, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    ],
+                  ),
+                ),
+                _buildFoodList(),
+                Divider(thickness: 2,),
+                _buildActionButtons(model),
               ],
             ),
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 2,
-            itemBuilder: (BuildContext context, int index)
-            {
-              return _MealListTile();
-            },
-            separatorBuilder: (BuildContext context, int index) => Divider(),
-          ),
-          Divider(thickness: 2,),
-          _buildActionButtons(),
-        ],
-      ),
+          );
+        }
     );
   }
 
-  Widget _buildActionButtons()
+  Widget _buildFoodList()
   {
+    return _meal.foods.isEmpty
+        ? Container(padding: EdgeInsets.symmetric(vertical: 15),child: Center(child: Text('Aggiungi qualcosa'),))
+        : ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: _meal.foods.length,
+            itemBuilder: (BuildContext context, int index)
+            {
+              return _MealListTile(_meal.foods.elementAt(index), _mealIndex);
+            },
+            separatorBuilder: (BuildContext context, int index) => Divider(),
+        );
+  }
+
+  Widget _buildActionButtons(AppDataModel model)
+  {
+    double totalkCal = 0;
+    double totalFats = 0;
+
+    for(Food food in _meal.foods)
+    {
+      totalkCal += food.kCal;
+      totalFats += food.fats;
+    }
+
     return  Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.only(left: 8, bottom: 3),
+          padding: const EdgeInsets.only(bottom: 3),
           child: Column(
             children: [
-              Text('Calorie totali: 1200kCal'),
-              Text('Grassi totali: 50g'),
+              Text('Calorie totali: $totalkCal kCal'),
+              Text('Grassi totali: $totalFats g'),
               Text('Acqua: 3l')
             ],
           ),
         ),
-        SizedBox(width: 5,),
+        //SizedBox(width: 5,),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
@@ -64,7 +90,8 @@ class MealCard extends StatelessWidget
                 IconButton(
                   icon: Icon(Icons.add),
                   onPressed: () {
-                    //TODO
+                    Food value = Food(name: 'Pisello', fats: 0, kCal: 1000.5, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg');
+                    model.addFood(_mealIndex, value);
                   },
                 ),
                 IconButton(
@@ -75,13 +102,11 @@ class MealCard extends StatelessWidget
                 ),
                 IconButton(
                   icon: Icon(Icons.delete),
-                  onPressed: () {
-                    deleteCard(this);
-                  },
+                  onPressed: () => model.removeMeal(this._meal)
                 ),
               ],
-            )
-          ],
+            ),
+          ]
         ),
       ],
     );
@@ -90,15 +115,21 @@ class MealCard extends StatelessWidget
 
 class _MealListTile extends StatelessWidget
 {
+  Food _food;
+  final int _mealIndex;
+  int quantity = 100;
+
+  _MealListTile(this._food, this._mealIndex);
+
   @override
   Widget build(BuildContext context)
   {
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: NetworkImage('https://www.agireora.org/img/news/pollo-bianco-primo-piano.jpg'),
+        backgroundImage: NetworkImage(_food.imagePath),
       ),
-      title: Text('Pollo'),
-      subtitle: Text('100g'),
+      title: Text(_food.name),
+      subtitle: Text('$quantity g'),
       trailing: _buildDeleteButton(),
       onTap: () {
 
@@ -108,10 +139,13 @@ class _MealListTile extends StatelessWidget
 
   Widget _buildDeleteButton()
   {
-    return IconButton(
-        icon: Icon(Icons.remove_circle_outline_rounded),
-        onPressed: () {
-          //TODO
+    return ScopedModelDescendant<AppDataModel>(
+        builder: (BuildContext context, Widget widget, AppDataModel model)
+        {
+          return IconButton (
+                  icon: Icon(Icons.remove_circle_outline_rounded),
+                  onPressed: () => model.removeFood(_mealIndex, _food)
+                );
         }
     );
   }
