@@ -4,6 +4,8 @@ import 'package:lose/widgets/MealCard.dart';
 
 class HomePage extends StatefulWidget
 {
+  List<MealCard> cards = List.empty(growable: true);
+
   @override
   State<StatefulWidget> createState()
   {
@@ -16,6 +18,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState()
   {
+    widget.cards.add(MealCard(deleteCard));
     super.initState();
   }
 
@@ -25,18 +28,26 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       drawer: _buildSideDrawer(context),
       appBar: AppBar(title: Text('Lose'),),
-      body: ListView.builder(
-          itemBuilder: (BuildContext context, int index)
+      body: ListView.separated(
+        padding: EdgeInsets.all(8),
+        itemCount: widget.cards.length,
+        itemBuilder: (BuildContext context, int index) 
           {
-            return MealCard();
+            if(widget.cards.isEmpty)
+            {
+              return Center(child: Text('Niente da visualizzare'),);  
+            }
+            return widget.cards.elementAt(index);
           },
-          itemCount: 5,
+        separatorBuilder: (BuildContext context, int index) => Divider(),
       ),
 
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          //TODO
+          setState(() {
+            widget.cards.add(MealCard(deleteCard));
+          });
         },
       ),
     );
@@ -69,5 +80,12 @@ class _HomePageState extends State<HomePage>
         ],
       ),
     );
+  }
+
+  void deleteCard(MealCard card)
+  {
+    setState(() {
+      widget.cards.remove(card);
+    });
   }
 }

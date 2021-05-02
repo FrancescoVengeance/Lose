@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added MealCard.dart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,8 +77,16 @@
       <option name="presentableId" value="Default" />
       <updated>1619520760602</updated>
       <workItem from="1619520768068" duration="638000" />
-      <workItem from="1619972856075" duration="5023000" />
+      <workItem from="1619972856075" duration="12850000" />
     </task>
+    <task id="LOCAL-00001" summary="Added MealCard.dart">
+      <created>1619977924260</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619977924260</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,5 +102,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added MealCard.dart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added MealCard.dart" />
   </component>
 </project>
