@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "650820187420",
+    "firebase_url": "https://lose-2b6bf-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "lose-2b6bf",
+    "storage_bucket": "lose-2b6bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650820187420:android:64f6b3b28bf8e0818f76d9",
+        "android_client_info": {
+          "package_name": "com.esoft.lose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650820187420-8rgpp32dr9qvs4h3kvm4er2fvbcmk9gn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXePd5lDZ8alVWr0slKzmJbD6i1dYfEAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650820187420-8rgpp32dr9qvs4h3kvm4er2fvbcmk9gn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

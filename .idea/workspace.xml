@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name">
-      <change afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals">
+      <change afterPath="$PROJECT_DIR$/lose/android/app/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lose/lib/models/User.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.yaml" afterDir="false" />
@@ -51,21 +58,33 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lose/android/app" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lose/android/app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lose/android/app" />
+      <recent name="$PROJECT_DIR$/lose/android" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -84,7 +103,10 @@
       <option name="presentableId" value="Default" />
       <updated>1619520760602</updated>
       <workItem from="1619520768068" duration="638000" />
-      <workItem from="1619972856075" duration="19298000" />
+      <workItem from="1619972856075" duration="19480000" />
+      <workItem from="1620031564760" duration="2148000" />
+      <workItem from="1620055162889" duration="4274000" />
+      <workItem from="1620059734231" duration="18848000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -100,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619986005351</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals">
+      <created>1619997463491</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619997463491</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,10 +145,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added MealCard.dart" />
     <MESSAGE value="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name" />
+    <MESSAGE value="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals" />
   </component>
 </project>

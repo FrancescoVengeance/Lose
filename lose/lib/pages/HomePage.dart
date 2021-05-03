@@ -1,4 +1,4 @@
-
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context, Widget child, AppDataModel model)
         {
           return  Scaffold(
-            drawer: _buildSideDrawer(context),
+            drawer: _buildSideDrawer(context, model.user.username, model.user.image),
             appBar: AppBar(title: Text('Lose'),),
             body: ListView.separated(
               padding: EdgeInsets.all(8),
@@ -48,26 +48,30 @@ class _HomePageState extends State<HomePage>
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
-                setState(() {
-                  model.addMeal(Meal('Cena'));
-                });
+                Meal meal = Meal("Cena");
+                model.addMeal(meal);
               },
             ),
           );
         }
     );
-
-
   }
 
-  Widget _buildSideDrawer(BuildContext context)
+  Widget _buildSideDrawer(BuildContext context, String username, String userImage)
   {
     return Drawer(
       child: Column(
         children: <Widget>[
           AppBar(
             automaticallyImplyLeading: false,
-            title: Text('UserNickname'),
+            title: Text(username),
+            leading: Container(
+              margin: EdgeInsets.all(3),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.transparent,
+                backgroundImage: NetworkImage(userImage),),
+            ),
           ),
           ListTile(
             title: Text('Opzioni'),
