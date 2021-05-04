@@ -9,6 +9,10 @@ class AppDataModel extends Model
   List<Meal> _meals = List.empty(growable: true);
   final User user = User(username: 'Francuzzu1', mail: 'francesco.esposity@gmail.com');
 
+  AppDataModel()
+  {
+    fetchMeals();
+  }
 
   List<Meal> get meals => List.from(_meals);
 
@@ -24,7 +28,7 @@ class AppDataModel extends Model
     }
 
     _meals.add(meal);
-    meal.id = DatabaseManager.getInstance().addMeal(meal);
+    meal.setId(DatabaseManager.getInstance().addMeal(meal).key);
     notifyListeners();
     return true;
   }
@@ -54,5 +58,10 @@ class AppDataModel extends Model
     _meals[mealIndex] = meal;
     DatabaseManager.getInstance().updateMeal(meal);
     notifyListeners();
+  }
+
+  void fetchMeals() async
+  {
+    await DatabaseManager.getInstance().fetchMeals();
   }
 }

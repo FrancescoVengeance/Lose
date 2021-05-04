@@ -19,22 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona">
-      <change afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Firebase now working, Added DatabaseManager.dart to manage database &#10;&#10;Added addFood, addMeal, removeMeal and updateMeal to DatabaseManager.dart&#10;&#10;Read and delete data left, bugfix. Added alert dialog to show an alert when a meal with the same name of other one is added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/google-services.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,17 +82,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lose/lib/main.dart" />
       <method v="2" />
@@ -128,7 +106,8 @@
       <workItem from="1620122902148" duration="3148000" />
       <workItem from="1620127478760" duration="5033000" />
       <workItem from="1620143624891" duration="500000" />
-      <workItem from="1620144216656" duration="9411000" />
+      <workItem from="1620144216656" duration="10319000" />
+      <workItem from="1620163903481" duration="3172000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -158,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620081135885</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Firebase now working, Added DatabaseManager.dart to manage database &#10;&#10;Added addFood, addMeal, removeMeal and updateMeal to DatabaseManager.dart&#10;&#10;Read and delete data left, bugfix. Added alert dialog to show an alert when a meal with the same name of other one is added.">
+      <created>1620155079070</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1620155079070</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +167,7 @@
     <MESSAGE value="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name" />
     <MESSAGE value="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals" />
     <MESSAGE value="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona" />
+    <MESSAGE value="Firebase now working, Added DatabaseManager.dart to manage database &#10;&#10;Added addFood, addMeal, removeMeal and updateMeal to DatabaseManager.dart&#10;&#10;Read and delete data left, bugfix. Added alert dialog to show an alert when a meal with the same name of other one is added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Firebase now working, Added DatabaseManager.dart to manage database &#10;&#10;Added addFood, addMeal, removeMeal and updateMeal to DatabaseManager.dart&#10;&#10;Read and delete data left, bugfix. Added alert dialog to show an alert when a meal with the same name of other one is added." />
   </component>
 </project>

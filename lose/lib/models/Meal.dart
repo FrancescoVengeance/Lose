@@ -7,12 +7,7 @@ class Meal
 {
   String _mealType;
   List<Food> _foods = List.empty(growable: true);
-  DatabaseReference id;
-
-  void setMealtype(String mealtype)
-  {
-    this._mealType = mealtype;
-  }
+  String _id;
 
   static final List<Food> random = [
     Food(name: 'Pisellone', fats: 10, kCal: 1500, fibers: 10, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
@@ -40,8 +35,22 @@ class Meal
     //_foods.add(Food(name: 'Pisellone', fats: 10, kCal: 1500, fibers: 10, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'));
   }
 
+  Meal.noParams();
+
+
   List<Food> get foods => List.from(_foods);
   String get mealType => _mealType;
+  String get id => _id;
+
+  void setMealtype(String mealtype)
+  {
+    this._mealType = mealtype;
+  }
+
+  void setId(String id)
+  {
+    _id = 'meals/$id';
+  }
 
   void addFood(Food food)
   {

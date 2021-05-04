@@ -32,15 +32,46 @@ class DatabaseManager
     return id;
   }
   
-  DatabaseReference addFood(Food food, DatabaseReference mealId)
+  DatabaseReference addFood(Food food, String mealId)
   {
-    DatabaseReference id = _databaseReference.child('meals/${mealId.key}/foods').push();
+    DatabaseReference id = _databaseReference.child('$mealId/').push();
     id.set(food.toJson());
     return id;
   }
 
   void updateMeal(Meal meal)
   {
-    meal.id.update(meal.toJson());
+    _databaseReference.child(meal.id).update(meal.toJson());
+  }
+
+  Future<List<Meal>> fetchMeals() async
+  {
+    DataSnapshot snapshot = await _databaseReference.child('meals/').once();
+    List<Meal> meals = List.empty(growable: true);
+
+    if(snapshot.value != null)
+    {
+      snapshot.value.forEach((key, value) {
+       Meal meal = Meal.noParams();
+       meal.setId(key);
+       meal.setMealtype(value['type']);
+       _buildFoodList(value, meal);
+       print('Key: $key value: $value');
+      });
+    }
+
+    return [];
+  }
+
+  void _buildFoodList(value, Meal meal)
+  {
+    for(dynamic key in value.keys)
+    {
+      for(dynamic key2 in value[key].keys)
+      {
+        print(value[key][key2]); //TODO da aggiustare
+        //meal.addFood(_generateFood(velue[key][key2]));
+      }
+    }
   }
 }
