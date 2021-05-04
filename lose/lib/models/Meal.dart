@@ -1,11 +1,18 @@
 import 'dart:math';
-
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:lose/models/Food.dart';
 
 class Meal
 {
   String _mealType;
   List<Food> _foods = List.empty(growable: true);
+  DatabaseReference id;
+
+  void setMealtype(String mealtype)
+  {
+    this._mealType = mealtype;
+  }
 
   static final List<Food> random = [
     Food(name: 'Pisellone', fats: 10, kCal: 1500, fibers: 10, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
@@ -28,7 +35,10 @@ class Meal
     Attributes.Fibers : 0,
   };
 
-  Meal(this._mealType);
+  Meal(this._mealType)
+  {
+    //_foods.add(Food(name: 'Pisellone', fats: 10, kCal: 1500, fibers: 10, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'));
+  }
 
   List<Food> get foods => List.from(_foods);
   String get mealType => _mealType;
@@ -74,6 +84,13 @@ class Meal
   double _roundDouble(double value, int places){
     double mod = pow(10.0, places);
     return ((value * mod).round().toDouble() / mod);
+  }
+
+  Map<String, dynamic> toJson()
+  {
+    return {
+      'type' : _mealType,
+    };
   }
 }
 

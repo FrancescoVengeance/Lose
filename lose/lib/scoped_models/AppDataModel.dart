@@ -1,5 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/models/User.dart';
@@ -9,25 +8,23 @@ class AppDataModel extends Model
 {
   List<Meal> _meals = List.empty(growable: true);
   final User user = User(username: 'Francuzzu1', mail: 'francesco.esposity@gmail.com');
-  DatabaseReference database;// = FirebaseDatabase(app: _firebaseApp).instance.reference();
-  final FirebaseApp _firebaseApp;
-  List<Meal> get meals => List.from(_meals);
 
-  AppDataModel(this._firebaseApp)
-  {
-    database = FirebaseDatabase(app: _firebaseApp).reference();
-  }
+
+  List<Meal> get meals => List.from(_meals);
 
   bool addMeal(Meal meal)
   {
     //aggiustare il controllo con il nome dello spuntino
-    if(_meals.contains(meal)) //can't add two dinners
+    for(Meal m in _meals)
     {
-      return false;
+      if(m.mealType == meal.mealType)
+      {
+        return false;
+      }
     }
 
     _meals.add(meal);
-    database.child('meal').set({'chiave', 'valore'});
+    meal.id = DatabaseManager.getInstance().addMeal(meal);
     notifyListeners();
     return true;
   }
@@ -41,12 +38,21 @@ class AppDataModel extends Model
   void addFood(int mealIndex, Food food)
   {
     _meals.elementAt(mealIndex).addFood(food);
+    food.id = DatabaseManager.getInstance().addFood(food, _meals.elementAt(mealIndex).id);
     notifyListeners();
   }
 
   void removeFood(int mealIndex, Food food)
   {
     _meals.elementAt(mealIndex).removeFood(food);
+    notifyListeners();
+  }
+
+  void updateMeal(Meal meal, int mealIndex)
+  {
+    meal.setMealtype('cazzarola'); //TODO
+    _meals[mealIndex] = meal;
+    DatabaseManager.getInstance().updateMeal(meal);
     notifyListeners();
   }
 }

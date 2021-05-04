@@ -23,6 +23,7 @@ class MealCard extends StatelessWidget
         builder: (BuildContext context, Widget child, AppDataModel model)
         {
           return Card(
+            elevation: 2,
             child: Column(
               children: [
                 Container(
@@ -92,7 +93,8 @@ class MealCard extends StatelessWidget
                 IconButton(
                   icon: Icon(Icons.read_more_rounded),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => DetailsPage(_meal, _mealIndex)));
+                    //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => DetailsPage(_meal, _mealIndex)));
+                    model.updateMeal(_meal, _mealIndex);
                   },
                 ),
                 IconButton(

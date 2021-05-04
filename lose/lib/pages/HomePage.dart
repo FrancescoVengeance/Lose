@@ -1,3 +1,6 @@
+import 'dart:ffi';
+import 'dart:math';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lose/models/Meal.dart';
@@ -16,6 +19,11 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
+  static final List<String> mealTypes = [
+    'Cena','Pranzo', 'Colazione', 'Merenda', 'Spuntino di mezzanotte', 
+    'Merenda post allenamento', 'Seconda merenda', 'Antipasto ', 
+    'Colazione fake'
+  ];
   @override
   void initState()
   {
@@ -48,8 +56,11 @@ class _HomePageState extends State<HomePage>
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
-                Meal meal = Meal("Cena");
-                model.addMeal(meal);
+                Meal meal = Meal(mealTypes.elementAt(Random().nextInt(mealTypes.length - 1)));
+                if(!model.addMeal(meal))
+                {
+                  _showAlertDialog();
+                }
               },
             ),
           );
@@ -90,6 +101,38 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
+    );
+  }
+
+  Future<Void> _showAlertDialog()
+  {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 24,
+          title: Text('Attenzione'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Non puoi aggiungere nello stesso giorno'),
+                Text('due pasti dello stesso tipo'),
+                Text('(es. due cene o due pranzi).'),
+                Text('Per favore inserisci un nome diverso per ogni pasto')
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              child: Text('Capito!'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

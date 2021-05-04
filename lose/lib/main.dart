@@ -24,7 +24,7 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp>
 {
-  final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp(name: 'Lose');
+  final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp();
 
   @override
   void initState()
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp>
   Widget build(BuildContext context)
   {
     return ScopedModel<AppDataModel>(
-      model: AppDataModel(FirebaseApp()),
+      model: AppDataModel(),
       child: MaterialApp(
         theme: ThemeData(
           brightness: Brightness.light,

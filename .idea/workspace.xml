@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals">
-      <change afterPath="$PROJECT_DIR$/lose/android/app/google-services.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/models/User.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" afterDir="false" />
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona">
+      <change afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/android/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
@@ -58,12 +74,13 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lose/android/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Android Logcat" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -76,15 +93,13 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -95,6 +110,9 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="" />
@@ -106,7 +124,11 @@
       <workItem from="1619972856075" duration="19480000" />
       <workItem from="1620031564760" duration="2148000" />
       <workItem from="1620055162889" duration="4274000" />
-      <workItem from="1620059734231" duration="18848000" />
+      <workItem from="1620059734231" duration="19044000" />
+      <workItem from="1620122902148" duration="3148000" />
+      <workItem from="1620127478760" duration="5033000" />
+      <workItem from="1620143624891" duration="500000" />
+      <workItem from="1620144216656" duration="9411000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -129,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619997463491</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona">
+      <created>1620081135884</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1620081135885</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +180,7 @@
     <MESSAGE value="Added MealCard.dart" />
     <MESSAGE value="Updated MealCard.dart&#10;&#10;Cards now display action button and brief stats, added the meal name" />
     <MESSAGE value="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Scoped model, improved MealCard.dart, added Food.dart and Meal.dart models &#10;&#10;Now if the card is empty, a text will be visualized, now you can add foods to a card and other meals" />
+    <MESSAGE value="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona" />
   </component>
 </project>
