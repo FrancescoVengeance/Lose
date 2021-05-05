@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
@@ -8,12 +10,10 @@ class AppDataModel extends Model
 {
   List<Meal> _meals = List.empty(growable: true);
   final User user = User(username: 'Francuzzu1', mail: 'francesco.esposity@gmail.com');
+  bool _isLoading;
 
-  AppDataModel()
-  {
-    fetchMeals();
-  }
 
+  bool get isLoading => _isLoading;
   List<Meal> get meals => List.from(_meals);
 
   bool addMeal(Meal meal)
@@ -36,19 +36,21 @@ class AppDataModel extends Model
   void removeMeal(Meal meal)
   {
     _meals.remove(meal);
+    DatabaseManager.getInstance().deleteMeal(meal);
     notifyListeners();
   }
   
   void addFood(int mealIndex, Food food)
   {
     _meals.elementAt(mealIndex).addFood(food);
-    food.id = DatabaseManager.getInstance().addFood(food, _meals.elementAt(mealIndex).id);
+    food.setId(DatabaseManager.getInstance().addFood(food, _meals.elementAt(mealIndex).id).key);
     notifyListeners();
   }
 
   void removeFood(int mealIndex, Food food)
   {
     _meals.elementAt(mealIndex).removeFood(food);
+    DatabaseManager.getInstance().deleteFood(food, _meals.elementAt(mealIndex));
     notifyListeners();
   }
 
@@ -62,6 +64,12 @@ class AppDataModel extends Model
 
   void fetchMeals() async
   {
-    await DatabaseManager.getInstance().fetchMeals();
+    _isLoading = true;
+    notifyListeners();
+
+    _meals = await DatabaseManager.getInstance().fetchMeals();
+
+    _isLoading = false;
+    notifyListeners();
   }
 }

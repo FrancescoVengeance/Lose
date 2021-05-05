@@ -20,13 +20,6 @@ class DatabaseManager
 
   DatabaseReference addMeal(Meal meal)
   {
-    //String date = '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
-    //database.push().child('meals/').push().set('qualcosa');
-    /*DatabaseReference id = _databaseReference.child('days').push();
-    id.set({'date' : date});
-    id = _databaseReference.child('days/meals').push();
-    id.set(meal.toJson());*/
-
     DatabaseReference id = _databaseReference.child('meals').push();
     id.set(meal.toJson());
     return id;
@@ -44,6 +37,16 @@ class DatabaseManager
     _databaseReference.child(meal.id).update(meal.toJson());
   }
 
+  void deleteMeal(Meal meal)
+  {
+    _databaseReference.child(meal.id).remove();
+  }
+
+  void deleteFood(Food food, Meal meal)
+  {
+    _databaseReference.child('${meal.id}/${food.id}').remove();
+  }
+
   Future<List<Meal>> fetchMeals() async
   {
     DataSnapshot snapshot = await _databaseReference.child('meals/').once();
@@ -56,21 +59,39 @@ class DatabaseManager
        meal.setId(key);
        meal.setMealtype(value['type']);
        _buildFoodList(value, meal);
-       print('Key: $key value: $value');
+       meals.add(meal);
       });
     }
 
-    return [];
+    return meals;
   }
 
   void _buildFoodList(value, Meal meal)
   {
-    for(dynamic key in value.keys)
+    for(String key in value.keys)
     {
-      for(dynamic key2 in value[key].keys)
+      try
       {
-        print(value[key][key2]); //TODO da aggiustare
-        //meal.addFood(_generateFood(velue[key][key2]));
+        String name = value[key]['name'].toString();
+        double kCal = double.parse(value[key]['kCal'].toString());
+        double fats = double.parse(value[key]['fats'].toString());
+        double carbohydrates = double.parse(value[key]['carbohydrates'].toString());
+        double proteins = double.parse(value[key]['proteins'].toString());
+        double salt = double.parse(value[key]['salt'].toString());
+        double calcium = double.parse(value[key]['calcium'].toString());
+        double fibers = double.parse(value[key]['fibers'].toString());
+        String imagePath = value[key]['imagePath'].toString();
+
+        Food temp = Food(name:name, kCal: kCal, fats: fats, carbohydrates: carbohydrates,
+            proteins: proteins, salt: salt, calcium: calcium, fibers: fibers, imagePath: imagePath
+        );
+        temp.setId(key.toString());
+        meal.addFood(temp);
+      }
+      catch(error)
+      {
+        print('_buildFoodList $key');
+        print(error);
       }
     }
   }

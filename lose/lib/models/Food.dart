@@ -12,12 +12,19 @@ class Food
   double calcium;
   double fibers;
   String imagePath;
-  DatabaseReference id;
+  String _id;
 
   Food({
     this.name = '', this.kCal = 0, this.fats = 0, this.carbohydrates = 0, this.proteins = 0,
     this.salt = 0, this.calcium = 0, this.fibers = 0, this.imagePath = '',
   });
+
+  String get id => _id;
+
+  void setId(String id)
+  {
+    this._id = id;
+  }
 
   Map<String, dynamic> toJson()
   {

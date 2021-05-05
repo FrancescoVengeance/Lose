@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage>
           return  Scaffold(
             drawer: _buildSideDrawer(context, model.user.username, model.user.image),
             appBar: AppBar(title: Text('Lose'),),
-            body: ListView.separated(
+            body: model.isLoading ? _loading() : ListView.separated(
               padding: EdgeInsets.all(8),
               itemCount: model.meals.length,
               itemBuilder: (BuildContext context, int index)
@@ -136,4 +136,8 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  Widget _loading()
+  {
+    return Center(child: CircularProgressIndicator(),);
+  }
 }

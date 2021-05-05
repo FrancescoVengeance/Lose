@@ -25,10 +25,12 @@ class MyApp extends StatefulWidget
 class _MyAppState extends State<MyApp>
 {
   final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp();
+  final AppDataModel model = AppDataModel();
 
   @override
   void initState()
   {
+    model.fetchMeals();
     super.initState();
   }
 
@@ -36,7 +38,7 @@ class _MyAppState extends State<MyApp>
   Widget build(BuildContext context)
   {
     return ScopedModel<AppDataModel>(
-      model: AppDataModel(),
+      model: model,
       child: MaterialApp(
         theme: ThemeData(
           brightness: Brightness.light,
@@ -52,7 +54,7 @@ class _MyAppState extends State<MyApp>
                  if(snapshot.hasError)
                  {
                   print('Errore ${snapshot.error.toString()}');
-                  return Text('Qualcosa è andato storto');
+                  return _networkError();
                  }
                  else if(snapshot.connectionState == ConnectionState.done)
                  {
@@ -65,5 +67,10 @@ class _MyAppState extends State<MyApp>
         },
       ),
     );
+  }
+
+  Widget _networkError()
+  {
+    return Scaffold(body: Center(child: Text('Errore di rete. Qualcosa è andato storto'),),);
   }
 }
