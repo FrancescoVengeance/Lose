@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
+import 'package:lose/models/User.dart' as MyUser;
 
 class DatabaseManager
 {
@@ -45,6 +47,28 @@ class DatabaseManager
   void deleteFood(Food food, Meal meal)
   {
     _databaseReference.child('${meal.id}/${food.id}').remove();
+  }
+
+  Future<bool> register(String mail, String password) async
+  {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: mail,
+          password: password
+      );
+
+      return true;
+
+    } on FirebaseAuthException catch (e)
+    {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+
+    return false;
   }
 
   Future<List<Meal>> fetchMeals() async

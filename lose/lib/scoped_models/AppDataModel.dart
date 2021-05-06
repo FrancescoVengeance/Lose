@@ -1,20 +1,42 @@
-import 'dart:io';
-
 import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/models/User.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AppDataModel extends Model
 {
   List<Meal> _meals = List.empty(growable: true);
-  final User user = User(username: 'Francuzzu1', mail: 'francesco.esposity@gmail.com');
+  User _user;//User(username: 'Francuzzu1', mail: 'francesco.esposity@gmail.com');
   bool _isLoading;
+  PublishSubject<bool> _checkLogin = PublishSubject<bool>();
 
 
+  PublishSubject<bool> get checkLogin => _checkLogin;
+  bool get isUserLoggedIn => !(_user == null);
   bool get isLoading => _isLoading;
   List<Meal> get meals => List.from(_meals);
+  User get user => User.copy(_user);
+
+  Future<bool> authenticate(String mail, String password) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    if(await DatabaseManager.getInstance().register(mail, password))
+    {
+      _checkLogin.add(true);
+      _user = User(username: mail.split("@")[0], mail: mail);
+      await fetchMeals();
+      _isLoading = false;
+      notifyListeners();
+    }
+
+    _isLoading = false;
+    notifyListeners();
+    return false;
+  }
 
   bool addMeal(Meal meal)
   {
@@ -62,10 +84,9 @@ class AppDataModel extends Model
     notifyListeners();
   }
 
-  void fetchMeals() async
+  Future<void> fetchMeals() async
   {
-    _isLoading = true;
-    notifyListeners();
+
 
     _meals = await DatabaseManager.getInstance().fetchMeals();
 

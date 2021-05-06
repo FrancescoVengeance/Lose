@@ -93,8 +93,8 @@ class MealCard extends StatelessWidget
                 IconButton(
                   icon: Icon(Icons.read_more_rounded),
                   onPressed: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => DetailsPage(_meal, _mealIndex)));
-                    model.updateMeal(_meal, _mealIndex);
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => DetailsPage(_meal, _mealIndex)));
+                    //model.updateMeal(_meal, _mealIndex);
                   },
                 ),
                 IconButton(

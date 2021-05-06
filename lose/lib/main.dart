@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:lose/pages/AuthPage.dart';
 import 'package:lose/pages/HomePage.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -30,7 +30,9 @@ class _MyAppState extends State<MyApp>
   @override
   void initState()
   {
-    model.fetchMeals();
+    model.checkLogin.listen((value) {
+      if(value) {setState(() {});}
+    });
     super.initState();
   }
 
@@ -47,23 +49,26 @@ class _MyAppState extends State<MyApp>
           buttonColor: Colors.lightBlue,
         ),
         routes: {
-          '/' : (BuildContext context) => FutureBuilder(
-            future: _firebaseApp,
-            builder: (BuildContext context, AsyncSnapshot<FirebaseApp> snapshot)
-            {
-                 if(snapshot.hasError)
-                 {
-                  print('Errore ${snapshot.error.toString()}');
-                  return _networkError();
-                 }
-                 else if(snapshot.connectionState == ConnectionState.done)
-                 {
+          '/' : (BuildContext context)
+          {
+            return !model.isUserLoggedIn ? AuthPage() : FutureBuilder(
+                future: _firebaseApp,
+                builder: (BuildContext context, AsyncSnapshot<FirebaseApp> snapshot)
+                {
+                  if(snapshot.hasError)
+                  {
+                    print('Errore ${snapshot.error.toString()}');
+                    return _networkError();
+                  }
+                  else if(snapshot.connectionState == ConnectionState.done)
+                  {
                     return HomePage();
-                 }
+                  }
 
-                 return Center(child: CircularProgressIndicator(),);
-            }
-          ),
+                  return Center(child: CircularProgressIndicator(),);
+                }
+            );
+          }
         },
       ),
     );

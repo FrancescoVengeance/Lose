@@ -19,13 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Bugfix and improvements">
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Bugfix and improvements. Added CRUD operations to DatabaseManager.dart&#10;&#10;Added google-services.json to gitignore">
+      <change afterPath="$PROJECT_DIR$/lose/lib/pages/AuthPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/User.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/User.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +61,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -65,7 +70,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RevediaTest" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AnimeGarden" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -84,6 +89,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lose/lib/main.dart" />
       <method v="2" />
@@ -111,7 +127,8 @@
       <workItem from="1620144216656" duration="10319000" />
       <workItem from="1620163903481" duration="3244000" />
       <workItem from="1620199019953" duration="664000" />
-      <workItem from="1620229600933" duration="10994000" />
+      <workItem from="1620229600933" duration="12453000" />
+      <workItem from="1620311525655" duration="14652000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -155,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620167088915</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Bugfix and improvements. Added CRUD operations to DatabaseManager.dart&#10;&#10;Added google-services.json to gitignore">
+      <created>1620241743030</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1620241743030</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +204,7 @@
     <MESSAGE value="Added firebase but not working&#10;&#10;bisogna riguardare il main e cercare di capire perchè il database non funziona" />
     <MESSAGE value="Firebase now working, Added DatabaseManager.dart to manage database &#10;&#10;Added addFood, addMeal, removeMeal and updateMeal to DatabaseManager.dart&#10;&#10;Read and delete data left, bugfix. Added alert dialog to show an alert when a meal with the same name of other one is added." />
     <MESSAGE value="Bugfix and improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfix and improvements" />
+    <MESSAGE value="Bugfix and improvements. Added CRUD operations to DatabaseManager.dart&#10;&#10;Added google-services.json to gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugfix and improvements. Added CRUD operations to DatabaseManager.dart&#10;&#10;Added google-services.json to gitignore" />
   </component>
 </project>

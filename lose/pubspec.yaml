@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   scoped_model: ^1.1.0
+  rxdart: ^0.26.0
   firebase_core: ^1.1.0
   firebase_database: ^6.1.2 #real time database
   firebase_auth: ^1.1.2
