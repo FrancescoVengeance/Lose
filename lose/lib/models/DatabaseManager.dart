@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
-import 'package:lose/models/User.dart' as MyUser;
 
 class DatabaseManager
 {
@@ -20,60 +19,92 @@ class DatabaseManager
     return _instance;
   }
 
-  DatabaseReference addMeal(Meal meal)
+  DatabaseReference addMeal(Meal meal, String userUID)
   {
-    DatabaseReference id = _databaseReference.child('meals').push();
+    DatabaseReference id = _databaseReference.child('$userUID/meals').push();
     id.set(meal.toJson());
     return id;
   }
   
-  DatabaseReference addFood(Food food, String mealId)
+  DatabaseReference addFood(Food food, String mealId, String userUID)
   {
-    DatabaseReference id = _databaseReference.child('$mealId/').push();
+    DatabaseReference id = _databaseReference.child('$userUID/$mealId/').push();
     id.set(food.toJson());
     return id;
   }
 
-  void updateMeal(Meal meal)
+  void updateMeal(Meal meal, String userUID)
   {
-    _databaseReference.child(meal.id).update(meal.toJson());
+    _databaseReference.child("$userUID/${meal.id}").update(meal.toJson());
   }
 
-  void deleteMeal(Meal meal)
+  void deleteMeal(Meal meal, String userUID)
   {
-    _databaseReference.child(meal.id).remove();
+    _databaseReference.child("$userUID/${meal.id}").remove();
   }
 
-  void deleteFood(Food food, Meal meal)
+  void deleteFood(Food food, Meal meal, String userUID)
   {
-    _databaseReference.child('${meal.id}/${food.id}').remove();
+    _databaseReference.child('$userUID/${meal.id}/${food.id}').remove();
   }
 
-  Future<bool> register(String mail, String password) async
+  Future<Map<User, String>> register(String mail, String password) async
   {
+    User user;
     try {
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: mail,
           password: password
       );
 
-      return true;
+      user = userCredential.user;
+      return {user : ''};
 
     } on FirebaseAuthException catch (e)
     {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+      if (e.code == 'weak-password')
+      {
+        return {user : "Password troppo debole"};
+      }
+      else if (e.code == 'email-already-in-use')
+      {
+        return {user : "Questo account esiste già!"};
       }
     }
 
-    return false;
+    return {user : 'Qualcosa è andato storto'};
   }
 
-  Future<List<Meal>> fetchMeals() async
+  Future<Map<User, String>> login(String mail, String password) async
   {
-    DataSnapshot snapshot = await _databaseReference.child('meals/').once();
+    User user;
+    try
+    {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: mail,
+          password: password
+      );
+
+      user = userCredential.user;
+      return {user : ""};
+    } on FirebaseAuthException catch (e)
+    {
+      if (e.code == 'user-not-found')
+      {
+        return {user : "Nessun utente corrisponde a questa mail"};
+      }
+      else if (e.code == 'wrong-password')
+      {
+        return {user : "Mail o password errati"};
+      }
+    }
+
+    return {user : "Qualcosa è andato storto"};
+  }
+
+  Future<List<Meal>> fetchMeals(String userUID) async
+  {
+    DataSnapshot snapshot = await _databaseReference.child('$userUID/meals/').once();
     List<Meal> meals = List.empty(growable: true);
 
     if(snapshot.value != null)

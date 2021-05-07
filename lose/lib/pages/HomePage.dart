@@ -1,7 +1,3 @@
-import 'dart:ffi';
-import 'dart:math';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
@@ -19,11 +15,6 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  static final List<String> mealTypes = [
-    'Cena','Pranzo', 'Colazione', 'Merenda', 'Spuntino di mezzanotte', 
-    'Merenda post allenamento', 'Seconda merenda', 'Antipasto ', 
-    'Colazione fake'
-  ];
   @override
   void initState()
   {
@@ -37,7 +28,7 @@ class _HomePageState extends State<HomePage>
         builder: (BuildContext context, Widget child, AppDataModel model)
         {
           return  Scaffold(
-            drawer: _buildSideDrawer(context, model.user.username, model.user.image),
+            drawer: !model.isLoading ? _buildSideDrawer(context, model, "https://shop.scavino.it/files/scavino2_Files/Foto/205352_3.PNG") : Container(),
             appBar: AppBar(title: Text('Lose'),),
             body: model.isLoading ? _loading() : ListView.separated(
               padding: EdgeInsets.all(8),
@@ -55,12 +46,8 @@ class _HomePageState extends State<HomePage>
 
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
-              onPressed: () {
-                Meal meal = Meal(mealTypes.elementAt(Random().nextInt(mealTypes.length - 1)));
-                if(!model.addMeal(meal))
-                {
-                  _showAlertDialog();
-                }
+              onPressed: () async {
+                await _showCreateMealDialog(model);
               },
             ),
           );
@@ -68,14 +55,14 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildSideDrawer(BuildContext context, String username, String userImage)
+  Widget _buildSideDrawer(BuildContext context, AppDataModel model, String userImage)
   {
     return Drawer(
       child: Column(
         children: <Widget>[
           AppBar(
             automaticallyImplyLeading: false,
-            title: Text(username),
+            title: Text(model.user.email.split("@")[0]),
             leading: Container(
               margin: EdgeInsets.all(3),
               child: CircleAvatar(
@@ -95,8 +82,8 @@ class _HomePageState extends State<HomePage>
           ListTile(
             title: Text('Logout'),
             trailing: Icon(Icons.logout),
-            onTap: () {
-              //TODO
+            onTap: () async {
+              await model.logOut();
             },
           ),
         ],
@@ -104,7 +91,61 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Future<Void> _showAlertDialog()
+  String _nomePasto;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<void> _showCreateMealDialog(AppDataModel model)
+  {
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext context)
+        {
+          return AlertDialog(
+            elevation: 24,
+            title: Text('Aggiungi nuovo pasto'),
+            content: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Inserisci nome pasto',
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      onSaved: (value){
+                        _nomePasto = value;
+                      }
+                  )
+              ),
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                child: Text('Annulla'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              MaterialButton(
+                child: Text('Crea'),
+                onPressed: () async {
+                  _formKey.currentState.save();
+                  if(!model.addMeal(Meal(_nomePasto))) {
+                    await _showAlertDialog();
+                  }
+                  else
+                  {
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ],
+          );
+        }
+    );
+  }
+
+  Future<void> _showAlertDialog()
   {
     return showDialog<void>(
       context: context,

@@ -1,41 +1,79 @@
+import 'dart:ffi';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
-import 'package:lose/models/User.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AppDataModel extends Model
 {
   List<Meal> _meals = List.empty(growable: true);
-  User _user;//User(username: 'Francuzzu1', mail: 'francesco.esposity@gmail.com');
-  bool _isLoading;
-  PublishSubject<bool> _checkLogin = PublishSubject<bool>();
+  bool _isLoading = false;
+  User user;
 
-
-  PublishSubject<bool> get checkLogin => _checkLogin;
-  bool get isUserLoggedIn => !(_user == null);
   bool get isLoading => _isLoading;
   List<Meal> get meals => List.from(_meals);
-  User get user => User.copy(_user);
 
-  Future<bool> authenticate(String mail, String password) async
+
+  Future<void> autologin() async
   {
     _isLoading = true;
     notifyListeners();
 
-    if(await DatabaseManager.getInstance().register(mail, password))
+    user = FirebaseAuth.instance.currentUser;
+    await fetchMeals();
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<Map<bool, String>> register(String mail, String password) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    Map<User, String> data;
+    data = await DatabaseManager.getInstance().register(mail, password);
+    user = data.keys.first;
+    if(user != null)
     {
-      _checkLogin.add(true);
-      _user = User(username: mail.split("@")[0], mail: mail);
       await fetchMeals();
       _isLoading = false;
       notifyListeners();
+      return {true : " "};
     }
 
     _isLoading = false;
     notifyListeners();
-    return false;
+    return {false : data.values.first};
+  }
+
+  Future<Map<bool, String>> login(String mail, String password) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    Map<User, String> data;
+    data = await DatabaseManager.getInstance().login(mail, password);
+    user = data.keys.first;
+    if(user != null)
+    {
+      await fetchMeals();
+      _isLoading = false;
+      notifyListeners();
+      return {true : ""};
+    }
+
+    _isLoading = false;
+    notifyListeners();
+    return {false : data.values.first};
+  }
+
+  Future<void> logOut() async
+  {
+    await FirebaseAuth.instance.signOut();
   }
 
   bool addMeal(Meal meal)
@@ -50,7 +88,7 @@ class AppDataModel extends Model
     }
 
     _meals.add(meal);
-    meal.setId(DatabaseManager.getInstance().addMeal(meal).key);
+    meal.setId(DatabaseManager.getInstance().addMeal(meal, user.uid).key);
     notifyListeners();
     return true;
   }
@@ -58,21 +96,21 @@ class AppDataModel extends Model
   void removeMeal(Meal meal)
   {
     _meals.remove(meal);
-    DatabaseManager.getInstance().deleteMeal(meal);
+    DatabaseManager.getInstance().deleteMeal(meal, user.uid);
     notifyListeners();
   }
   
   void addFood(int mealIndex, Food food)
   {
     _meals.elementAt(mealIndex).addFood(food);
-    food.setId(DatabaseManager.getInstance().addFood(food, _meals.elementAt(mealIndex).id).key);
+    food.setId(DatabaseManager.getInstance().addFood(food, _meals.elementAt(mealIndex).id, user.uid).key);
     notifyListeners();
   }
 
   void removeFood(int mealIndex, Food food)
   {
     _meals.elementAt(mealIndex).removeFood(food);
-    DatabaseManager.getInstance().deleteFood(food, _meals.elementAt(mealIndex));
+    DatabaseManager.getInstance().deleteFood(food, _meals.elementAt(mealIndex), user.uid);
     notifyListeners();
   }
 
@@ -80,17 +118,12 @@ class AppDataModel extends Model
   {
     meal.setMealtype('cazzarola'); //TODO
     _meals[mealIndex] = meal;
-    DatabaseManager.getInstance().updateMeal(meal);
+    DatabaseManager.getInstance().updateMeal(meal, user.uid);
     notifyListeners();
   }
 
   Future<void> fetchMeals() async
   {
-
-
-    _meals = await DatabaseManager.getInstance().fetchMeals();
-
-    _isLoading = false;
-    notifyListeners();
+    _meals = await DatabaseManager.getInstance().fetchMeals(user.uid);
   }
 }

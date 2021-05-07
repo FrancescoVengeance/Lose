@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lose/pages/AuthPage.dart';
@@ -6,10 +7,11 @@ import 'package:lose/scoped_models/AppDataModel.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 
-void main()
+void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
+  await Firebase.initializeApp();
+  //await FirebaseAuth.instance.signOut();
   runApp(MyApp());
 }
 
@@ -24,14 +26,29 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp>
 {
-  final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp();
+  //final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp();
   final AppDataModel model = AppDataModel();
+  bool _isLogged = true;
 
   @override
   void initState()
   {
-    model.checkLogin.listen((value) {
-      if(value) {setState(() {});}
+    FirebaseAuth.instance.authStateChanges().listen((User user) async {
+
+      if(user == null)
+      {
+        setState(() {
+          _isLogged = false;
+        });
+      }
+      else
+      {
+        await model.autologin();
+        setState(() {
+          print('User logged');
+          _isLogged = true;
+        });
+      }
     });
     super.initState();
   }
@@ -51,7 +68,7 @@ class _MyAppState extends State<MyApp>
         routes: {
           '/' : (BuildContext context)
           {
-            return !model.isUserLoggedIn ? AuthPage() : FutureBuilder(
+            return _isLogged ? HomePage() : AuthPage(); /*FutureBuilder(
                 future: _firebaseApp,
                 builder: (BuildContext context, AsyncSnapshot<FirebaseApp> snapshot)
                 {
@@ -66,8 +83,8 @@ class _MyAppState extends State<MyApp>
                   }
 
                   return Center(child: CircularProgressIndicator(),);
-                }
-            );
+                }*/
+            //);
           }
         },
       ),

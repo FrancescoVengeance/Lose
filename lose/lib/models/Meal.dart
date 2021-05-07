@@ -30,10 +30,7 @@ class Meal
     Attributes.Fibers : 0,
   };
 
-  Meal(this._mealType)
-  {
-    //_foods.add(Food(name: 'Pisellone', fats: 10, kCal: 1500, fibers: 10, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'));
-  }
+  Meal(this._mealType);
 
   Meal.noParams();
 
