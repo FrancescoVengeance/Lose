@@ -2,10 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/pages/DetailsPage.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
+import 'package:lose/widgets/BarCodePicker.dart';
 import 'package:lose/widgets/MealListTile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -87,7 +90,13 @@ class MealCard extends StatelessWidget
                 IconButton(
                   icon: Icon(Icons.add),
                   onPressed: () {
-                    model.addFood(_mealIndex, Meal.random.elementAt(Random().nextInt(Meal.random.length -1)));
+                   showModalBottomSheet(
+                       context: context,
+                       builder: (BuildContext context){
+                        return BarCodePicker(model, _mealIndex);
+                       }
+                   );
+                    //model.addFood(_mealIndex, Meal.random.elementAt(Random().nextInt(Meal.random.length -1)));
                   },
                 ),
                 IconButton(

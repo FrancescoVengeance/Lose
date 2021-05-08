@@ -19,15 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added AuthPage.dart and registration with FirebaseAuth.&#10;&#10;Bugfix and improvements">
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Full working Authentication.&#10;&#10;Bugfix and improvements. Fixed an issue with CircularProgressBar in HomePage.dart. Added login method to DatabaseManager.dart.">
+      <change afterPath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/User.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/pages/AuthPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/AuthPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +86,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lose/lib/main.dart" />
       <method v="2" />
@@ -117,7 +127,8 @@
       <workItem from="1620229600933" duration="12453000" />
       <workItem from="1620311525655" duration="14735000" />
       <workItem from="1620375360774" duration="7845000" />
-      <workItem from="1620396877019" duration="12513000" />
+      <workItem from="1620396877019" duration="12942000" />
+      <workItem from="1620489090999" duration="8926000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -175,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620329835947</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Full working Authentication.&#10;&#10;Bugfix and improvements. Fixed an issue with CircularProgressBar in HomePage.dart. Added login method to DatabaseManager.dart.">
+      <created>1620414152233</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1620414152233</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +220,7 @@
     <MESSAGE value="Bugfix and improvements" />
     <MESSAGE value="Bugfix and improvements. Added CRUD operations to DatabaseManager.dart&#10;&#10;Added google-services.json to gitignore" />
     <MESSAGE value="Added AuthPage.dart and registration with FirebaseAuth.&#10;&#10;Bugfix and improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added AuthPage.dart and registration with FirebaseAuth.&#10;&#10;Bugfix and improvements" />
+    <MESSAGE value="Full working Authentication.&#10;&#10;Bugfix and improvements. Fixed an issue with CircularProgressBar in HomePage.dart. Added login method to DatabaseManager.dart." />
+    <option name="LAST_COMMIT_MESSAGE" value="Full working Authentication.&#10;&#10;Bugfix and improvements. Fixed an issue with CircularProgressBar in HomePage.dart. Added login method to DatabaseManager.dart." />
   </component>
 </project>
