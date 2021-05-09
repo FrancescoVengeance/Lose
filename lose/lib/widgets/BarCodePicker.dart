@@ -1,8 +1,9 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/Food.dart';
+import 'package:lose/models/FoodDatabaseManager.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 
@@ -56,10 +57,17 @@ class _BarCodePickerState extends State<BarCodePicker>
                 child: Icon(Icons.camera_alt_outlined),
                 onPressed: () async {
                   String result = await _scanBarcode();
-                  if(result != null){
-                    setState(() {
-                      code = result;
-                    });
+                  print("BARCODE $result");
+                  if(result != null)
+                  {
+                    _pickedFood = await FoodDatabaseManager.getInstance().getFoodFromCode(result);
+                    if(_pickedFood != null)
+                    {
+                      setState(() {
+                        code = result;
+                        //widget._model.addFood(widget._mealIndex, food);
+                      });
+                    }
                   }
                 }
             ),
@@ -80,7 +88,55 @@ class _BarCodePickerState extends State<BarCodePicker>
     return Container(
       child: Column(
         children: [
-          Text(code),
+          Text("${_pickedFood.name}", style: TextStyle(fontWeight: FontWeight.bold),),
+          SizedBox(height: 10,),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Text("Per 100g", style: TextStyle(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 20,),
+                    Text("Energia ${_pickedFood.kCal}"),
+                    SizedBox(height: 10,),
+                    Text("Grassi ${_pickedFood.fats}"),
+                    SizedBox(height: 10,),
+                    Text("Carboidrati ${_pickedFood.carbohydrates}"),
+                    SizedBox(height: 10,),
+                    Text("Proteine ${_pickedFood.proteins}"),
+                    SizedBox(height: 10,),
+                    Text("Sale ${_pickedFood.salt}"),
+                    SizedBox(height: 10,),
+                    Text("Calcio ${_pickedFood.calcium}"),
+                    SizedBox(height: 10,),
+                    Text("Fibre ${_pickedFood.fibers}"),
+                  ],
+                ),
+
+                Column(
+                  children: [
+                    Text("Per x g", style: TextStyle(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 20,),
+                    Text("Energia ${_pickedFood.kCal}"),
+                    SizedBox(height: 10,),
+                    Text("Grassi ${_pickedFood.fats}"),
+                    SizedBox(height: 10,),
+                    Text("Carboidrati ${_pickedFood.carbohydrates}"),
+                    SizedBox(height: 10,),
+                    Text("Proteine ${_pickedFood.proteins}"),
+                    SizedBox(height: 10,),
+                    Text("Sale ${_pickedFood.salt}"),
+                    SizedBox(height: 10,),
+                    Text("Calcio ${_pickedFood.calcium}"),
+                    SizedBox(height: 10,),
+                    Text("Fibre ${_pickedFood.fibers}"),
+                  ],
+                )
+              ],
+            ),
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -91,13 +147,16 @@ class _BarCodePickerState extends State<BarCodePicker>
                       onPressed: () {
                        setState(() {
                          code = null;
+                         _pickedFood = null;
                        });
                       }
                   ),
                   ElevatedButton(
                       child: Text("OK"),
                       onPressed: () {
-                        widget._model.addFood(widget._mealIndex, Meal.random.elementAt(Random().nextInt(Meal.random.length -1)));
+                        widget._model.addFood(widget._mealIndex, _pickedFood);
+                        code = null;
+                        _pickedFood = null;
                         Navigator.of(context).pop();
                       }
                   )
@@ -110,9 +169,9 @@ class _BarCodePickerState extends State<BarCodePicker>
     );
   }
 
-  Future<String> _scanBarcode() async
+  Future<String> _scanBarcode()
   {
-    return await FlutterBarcodeScanner.scanBarcode(
+    return FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'Cancel', true, ScanMode.BARCODE
     );
   }
