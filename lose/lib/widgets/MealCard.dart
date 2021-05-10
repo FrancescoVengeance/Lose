@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/pages/DetailsPage.dart';
@@ -16,8 +17,9 @@ class MealCard extends StatelessWidget
 {
   final Meal _meal;
   final int _mealIndex;
+  String _date;
 
-  MealCard(this._meal, this._mealIndex);
+  MealCard(this._meal, this._mealIndex, this._date);
 
   @override
   Widget build(BuildContext context)
@@ -59,7 +61,7 @@ class MealCard extends StatelessWidget
             itemCount: _meal.foods.length,
             itemBuilder: (BuildContext context, int index)
             {
-              return MealListTile(_meal.foods.elementAt(index), _mealIndex);
+              return MealListTile(_meal.foods.elementAt(index), _mealIndex, _date);
             },
             separatorBuilder: (BuildContext context, int index) => Divider(),
         );
@@ -102,13 +104,13 @@ class MealCard extends StatelessWidget
                 IconButton(
                   icon: Icon(Icons.read_more_rounded),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => DetailsPage(_meal, _mealIndex)));
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => DetailsPage(_meal, _mealIndex, _date)));
                     //model.updateMeal(_meal, _mealIndex);
                   },
                 ),
                 IconButton(
                   icon: Icon(Icons.delete),
-                  onPressed: () => model.removeMeal(this._meal)
+                  onPressed: () => model.removeMeal(this._meal, _date)
                 ),
               ],
             ),

@@ -24,6 +24,7 @@ class _BarCodePickerState extends State<BarCodePicker>
 {
   String code;
   Food _pickedFood;
+  double _weight = 100; //in grammi
   @override
   void initState()
   {
@@ -91,8 +92,9 @@ class _BarCodePickerState extends State<BarCodePicker>
           Text("${_pickedFood.name}", style: TextStyle(fontWeight: FontWeight.bold),),
           SizedBox(height: 10,),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: EdgeInsets.symmetric(horizontal: 15),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
@@ -116,27 +118,55 @@ class _BarCodePickerState extends State<BarCodePicker>
 
                 Column(
                   children: [
-                    Text("Per x g", style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text("Per ${_weight} g", style: TextStyle(fontWeight: FontWeight.bold)),
                     SizedBox(height: 20,),
-                    Text("Energia ${_pickedFood.kCal}"),
+                    Text("Energia ${Meal.roundDouble((_pickedFood.kCal * _weight) / 100, 2)}"),
                     SizedBox(height: 10,),
-                    Text("Grassi ${_pickedFood.fats}"),
+                    Text("Grassi ${Meal.roundDouble((_pickedFood.fats * _weight) /100, 2)}"),
                     SizedBox(height: 10,),
-                    Text("Carboidrati ${_pickedFood.carbohydrates}"),
+                    Text("Carboidrati ${Meal.roundDouble((_pickedFood.carbohydrates * _weight)/100, 2)}"),
                     SizedBox(height: 10,),
-                    Text("Proteine ${_pickedFood.proteins}"),
+                    Text("Proteine ${Meal.roundDouble((_pickedFood.proteins * _weight) /100, 2)}"),
                     SizedBox(height: 10,),
-                    Text("Sale ${_pickedFood.salt}"),
+                    Text("Sale ${Meal.roundDouble((_pickedFood.salt * _weight) /100, 2)}"),
                     SizedBox(height: 10,),
-                    Text("Calcio ${_pickedFood.calcium}"),
+                    Text("Calcio ${Meal.roundDouble((_pickedFood.calcium * _weight) /100, 2)}"),
                     SizedBox(height: 10,),
-                    Text("Fibre ${_pickedFood.fibers}"),
+                    Text("Fibre ${Meal.roundDouble((_pickedFood.fibers * _weight) /100 , 2)}"),
                   ],
                 )
               ],
             ),
           ),
+          ButtonBar(
+            alignment: MainAxisAlignment.end,
+            children: [
+              Text("Quantità"),
+              SizedBox(width: 10,),
+              IconButton(icon: Icon(Icons.indeterminate_check_box_outlined),
+                  onPressed: () {
+                    if(_weight > 0)
+                    {
+                      setState(() {
+                        _weight -= 1;
+                      });
+                    }
+                  }
+              ),
 
+              SizedBox(width: 10,),
+              Text(_weight.toString() + "g"),
+              SizedBox(width: 10,),
+
+              IconButton(icon: Icon(Icons.add_box_outlined),
+                  onPressed: (){
+                    setState(() {
+                      _weight += 1;
+                    });
+                  }
+              )
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -154,6 +184,7 @@ class _BarCodePickerState extends State<BarCodePicker>
                   ElevatedButton(
                       child: Text("OK"),
                       onPressed: () {
+                        _pickedFood.setQuantity(_weight);
                         widget._model.addFood(widget._mealIndex, _pickedFood);
                         code = null;
                         _pickedFood = null;

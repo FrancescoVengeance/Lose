@@ -79,15 +79,15 @@ class Meal
 
   void _round()
   {
-    totals[Attributes.KCal] = _roundDouble(totals[Attributes.KCal], 2);
-    totals[Attributes.Fats] = _roundDouble(totals[Attributes.Fats], 2);
-    totals[Attributes.Carbohydrates] = _roundDouble(totals[Attributes.Carbohydrates], 2);
-    totals[Attributes.Proteins] = _roundDouble(totals[Attributes.Proteins], 2);
-    totals[Attributes.Salt] = _roundDouble(totals[Attributes.Salt], 2);
-    totals[Attributes.Fibers] = _roundDouble(totals[Attributes.Fibers], 2);
+    totals[Attributes.KCal] = roundDouble(totals[Attributes.KCal], 2);
+    totals[Attributes.Fats] = roundDouble(totals[Attributes.Fats], 2);
+    totals[Attributes.Carbohydrates] = roundDouble(totals[Attributes.Carbohydrates], 2);
+    totals[Attributes.Proteins] = roundDouble(totals[Attributes.Proteins], 2);
+    totals[Attributes.Salt] = roundDouble(totals[Attributes.Salt], 2);
+    totals[Attributes.Fibers] = roundDouble(totals[Attributes.Fibers], 2);
   }
 
-  double _roundDouble(double value, int places){
+  static double roundDouble(double value, int places){
     double mod = pow(10.0, places);
     return ((value * mod).round().toDouble() / mod);
   }

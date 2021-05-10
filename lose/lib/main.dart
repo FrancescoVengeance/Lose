@@ -11,6 +11,10 @@ void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  DateTime now = DateTime.now();
+  //print(DateTime(now.year, now.month, now.day));
+
   //await FirebaseAuth.instance.signOut();
   runApp(MyApp());
 }
@@ -43,7 +47,7 @@ class _MyAppState extends State<MyApp>
       }
       else
       {
-        await model.autologin();
+        //await model.autologin();
         setState(() {
           print('User logged');
           _isLogged = true;

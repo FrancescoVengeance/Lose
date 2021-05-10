@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:lose/models/Meal.dart';
 
 class Food
 {
@@ -13,6 +14,7 @@ class Food
   double fibers;
   String imagePath;
   String _id;
+  double _quantity = 100;
 
   List<String> _attributes = List.empty(growable: true);
 
@@ -33,10 +35,24 @@ class Food
   }
 
   String get id => _id;
+  double get quantity => _quantity;
 
   void setId(String id)
   {
     this._id = id;
+  }
+
+  void setQuantity(double quantity)
+  {
+    _quantity = quantity;
+
+    kCal = Meal.roundDouble((kCal * _quantity / 100), 2);
+    fats = Meal.roundDouble((fats * _quantity / 100), 2);
+    carbohydrates = Meal.roundDouble((carbohydrates * _quantity / 100), 2);
+    proteins = Meal.roundDouble((proteins * _quantity / 100), 2);
+    salt = Meal.roundDouble((salt * _quantity / 100), 2);
+    calcium = Meal.roundDouble((calcium * _quantity / 100), 2);
+    fibers = Meal.roundDouble((fibers * _quantity / 100), 2);
   }
 
   Map<String, dynamic> toJson()
@@ -50,7 +66,8 @@ class Food
       'salt' : salt,
       'calcium' : calcium,
       'fibers' : fibers,
-      'imagePath' : imagePath
+      'imagePath' : imagePath,
+      'quantity' : _quantity
     };
   }
 

@@ -19,15 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added BarCodeScanner to get food codes. &#10;&#10;Bugfix and improvements">
-      <change afterPath="$PROJECT_DIR$/lose/assets/fork.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real.">
+      <change afterPath="$PROJECT_DIR$/lose/lib/models/DateFormat.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +137,9 @@
       <workItem from="1620375360774" duration="7845000" />
       <workItem from="1620396877019" duration="12942000" />
       <workItem from="1620489090999" duration="11396000" />
-      <workItem from="1620555997664" duration="13386000" />
+      <workItem from="1620555997664" duration="13622000" />
+      <workItem from="1620629143533" duration="4749000" />
+      <workItem from="1620644618470" duration="11042000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -205,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620501241079</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real.">
+      <created>1620589169407</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1620589169407</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +247,7 @@
     <MESSAGE value="Added AuthPage.dart and registration with FirebaseAuth.&#10;&#10;Bugfix and improvements" />
     <MESSAGE value="Full working Authentication.&#10;&#10;Bugfix and improvements. Fixed an issue with CircularProgressBar in HomePage.dart. Added login method to DatabaseManager.dart." />
     <MESSAGE value="Added BarCodeScanner to get food codes. &#10;&#10;Bugfix and improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added BarCodeScanner to get food codes. &#10;&#10;Bugfix and improvements" />
+    <MESSAGE value="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real." />
   </component>
 </project>

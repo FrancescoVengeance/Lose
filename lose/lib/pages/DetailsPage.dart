@@ -11,7 +11,10 @@ class DetailsPage extends StatelessWidget
 {
   final Meal _meal;
   final int _mealIndex;
-  DetailsPage(this._meal, this._mealIndex);
+  String _date;
+
+  DetailsPage(this._meal, this._mealIndex, this._date);
+
 
   @override
   Widget build(BuildContext context)
@@ -32,7 +35,7 @@ class DetailsPage extends StatelessWidget
                   itemCount: _meal.foods.length,
                   itemBuilder: (BuildContext context, int index)
                   {
-                    return MealListTile(_meal.foods.elementAt(index), _mealIndex);
+                    return MealListTile(_meal.foods.elementAt(index), _mealIndex, _date);
                   },
                 ),
                 Divider(thickness: 2,color: Theme.of(context).accentColor,),

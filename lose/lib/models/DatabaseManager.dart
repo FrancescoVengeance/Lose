@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 
@@ -21,31 +22,31 @@ class DatabaseManager
 
   DatabaseReference addMeal(Meal meal, String userUID)
   {
-    DatabaseReference id = _databaseReference.child('$userUID/meals').push();
+    DatabaseReference id = _databaseReference.child('$userUID/${DateFormat.dateToString(DateTime.now())}/meals').push();
     id.set(meal.toJson());
     return id;
   }
   
   DatabaseReference addFood(Food food, String mealId, String userUID)
   {
-    DatabaseReference id = _databaseReference.child('$userUID/$mealId/').push();
+    DatabaseReference id = _databaseReference.child('$userUID/${DateFormat.dateToString(DateTime.now())}/$mealId/').push();
     id.set(food.toJson());
     return id;
   }
 
-  void updateMeal(Meal meal, String userUID)
+  void updateMeal(Meal meal, String userUID, String date)
   {
-    _databaseReference.child("$userUID/${meal.id}").update(meal.toJson());
+    _databaseReference.child("$userUID/$date/${meal.id}").update(meal.toJson());
   }
 
-  void deleteMeal(Meal meal, String userUID)
+  void deleteMeal(Meal meal, String userUID, String date)
   {
-    _databaseReference.child("$userUID/${meal.id}").remove();
+    _databaseReference.child("$userUID/$date/${meal.id}").remove();
   }
 
-  void deleteFood(Food food, Meal meal, String userUID)
+  void deleteFood(Food food, Meal meal, String userUID, String date)
   {
-    _databaseReference.child('$userUID/${meal.id}/${food.id}').remove();
+    _databaseReference.child('$userUID/$date/${meal.id}/${food.id}').remove();
   }
 
   Future<Map<User, String>> register(String mail, String password) async
@@ -102,9 +103,9 @@ class DatabaseManager
     return {user : "Qualcosa è andato storto"};
   }
 
-  Future<List<Meal>> fetchMeals(String userUID) async
+  Future<List<Meal>> fetchMeals(String userUID, String date) async
   {
-    DataSnapshot snapshot = await _databaseReference.child('$userUID/meals/').once();
+    DataSnapshot snapshot = await _databaseReference.child('$userUID/$date/meals/').once();
     List<Meal> meals = List.empty(growable: true);
 
     if(snapshot.value != null)
@@ -136,11 +137,14 @@ class DatabaseManager
         double calcium = double.parse(value[key]['calcium'].toString());
         double fibers = double.parse(value[key]['fibers'].toString());
         String imagePath = value[key]['imagePath'].toString();
+        double quantity = double.parse(value[key]['quantity'].toString());
+        print("ENTRATO $quantity");
 
         Food temp = Food(name:name, kCal: kCal, fats: fats, carbohydrates: carbohydrates,
             proteins: proteins, salt: salt, calcium: calcium, fibers: fibers, imagePath: imagePath
         );
         temp.setId(key.toString());
+        temp.setQuantity(quantity);
         meal.addFood(temp);
       }
       catch(error)

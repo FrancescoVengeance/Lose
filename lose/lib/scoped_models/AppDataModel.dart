@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lose/models/DatabaseManager.dart';
+import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AppDataModel extends Model
@@ -15,7 +13,11 @@ class AppDataModel extends Model
 
   bool get isLoading => _isLoading;
   List<Meal> get meals => List.from(_meals);
-
+  
+  AppDataModel()
+  {
+    autologin().then((value) => null);
+  }
 
   Future<void> autologin() async
   {
@@ -23,7 +25,7 @@ class AppDataModel extends Model
     notifyListeners();
 
     user = FirebaseAuth.instance.currentUser;
-    await fetchMeals();
+    await fetchMeals(DateFormat.dateToString(DateTime.now()));
 
     _isLoading = false;
     notifyListeners();
@@ -39,7 +41,7 @@ class AppDataModel extends Model
     user = data.keys.first;
     if(user != null)
     {
-      await fetchMeals();
+      await fetchMeals(DateFormat.dateToString(DateTime.now()));
       _isLoading = false;
       notifyListeners();
       return {true : " "};
@@ -60,7 +62,7 @@ class AppDataModel extends Model
     user = data.keys.first;
     if(user != null)
     {
-      await fetchMeals();
+      await fetchMeals(DateFormat.dateToString(DateTime.now()));
       _isLoading = false;
       notifyListeners();
       return {true : ""};
@@ -93,10 +95,10 @@ class AppDataModel extends Model
     return true;
   }
 
-  void removeMeal(Meal meal)
+  void removeMeal(Meal meal, String date)
   {
     _meals.remove(meal);
-    DatabaseManager.getInstance().deleteMeal(meal, user.uid);
+    DatabaseManager.getInstance().deleteMeal(meal, user.uid, date);
     notifyListeners();
   }
   
@@ -107,23 +109,35 @@ class AppDataModel extends Model
     notifyListeners();
   }
 
-  void removeFood(int mealIndex, Food food)
+  void removeFood(int mealIndex, Food food, String date)
   {
     _meals.elementAt(mealIndex).removeFood(food);
-    DatabaseManager.getInstance().deleteFood(food, _meals.elementAt(mealIndex), user.uid);
+    DatabaseManager.getInstance().deleteFood(food, _meals.elementAt(mealIndex), user.uid, date);
     notifyListeners();
   }
 
-  void updateMeal(Meal meal, int mealIndex)
+  void updateMeal(Meal meal, int mealIndex, String date)
   {
     meal.setMealtype('cazzarola'); //TODO
     _meals[mealIndex] = meal;
-    DatabaseManager.getInstance().updateMeal(meal, user.uid);
+    DatabaseManager.getInstance().updateMeal(meal, user.uid, date);
     notifyListeners();
   }
 
-  Future<void> fetchMeals() async
+  Future<void> fetchMeals(String date) async
   {
-    _meals = await DatabaseManager.getInstance().fetchMeals(user.uid);
+    _meals = await DatabaseManager.getInstance().fetchMeals(user.uid, date);
+  }
+
+  Future<void> fetchMealsDate(String date) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    _meals.clear();
+    await fetchMeals(date);
+
+    _isLoading = false;
+    notifyListeners();
   }
 }

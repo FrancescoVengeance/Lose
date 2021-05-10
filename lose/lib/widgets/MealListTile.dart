@@ -4,12 +4,13 @@ import 'package:lose/models/Food.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class MealListTile extends StatelessWidget {
+class MealListTile extends StatelessWidget
+{
   Food _food;
   final int _mealIndex;
-  int quantity = 100;
+  String _date;
 
-  MealListTile(this._food, this._mealIndex);
+  MealListTile(this._food, this._mealIndex, this._date);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class MealListTile extends StatelessWidget {
         backgroundImage: NetworkImage(_food.imagePath),
       ),
       title: Text(_food.name),
-      subtitle: Text('$quantity g'),
+      subtitle: Text('${_food.quantity} g'),
       trailing: _buildDeleteButton(),
       onTap: () {
         //TODO
@@ -32,7 +33,7 @@ class MealListTile extends StatelessWidget {
         builder: (BuildContext context, Widget widget, AppDataModel model) {
           return IconButton(
               icon: Icon(Icons.remove_circle_outline_rounded),
-              onPressed: () => model.removeFood(_mealIndex, _food)
+              onPressed: () => model.removeFood(_mealIndex, _food, _date)
           );
         }
     );

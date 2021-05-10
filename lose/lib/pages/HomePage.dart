@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lose/models/DatabaseManager.dart';
+import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 import 'package:lose/widgets/MealCard.dart';
@@ -6,6 +8,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 class HomePage extends StatefulWidget
 {
+  DateTime currentDate = DateTime.now();
+
   @override
   State<StatefulWidget> createState()
   {
@@ -30,18 +34,11 @@ class _HomePageState extends State<HomePage>
           return  Scaffold(
             drawer: !model.isLoading ? _buildSideDrawer(context, model, "https://shop.scavino.it/files/scavino2_Files/Foto/205352_3.PNG") : Container(),
             appBar: AppBar(title: Text('Lose'),),
-            body: model.isLoading ? _loading() : ListView.separated(
-              padding: EdgeInsets.all(8),
-              itemCount: model.meals.length,
-              itemBuilder: (BuildContext context, int index)
-              {
-                if(model.meals.isEmpty)
-                {
-                  return Center(child: Text('Niente da visualizzare'),);
-                }
-                return MealCard(model.meals.elementAt(index), index);
-              },
-              separatorBuilder: (BuildContext context, int index) => Divider(),
+            body: model.isLoading ? _loading() : Column(
+              children: [
+                _showDate(model),
+                _showMealsList(model),
+              ],
             ),
 
             floatingActionButton: FloatingActionButton(
@@ -180,5 +177,71 @@ class _HomePageState extends State<HomePage>
   Widget _loading()
   {
     return Center(child: CircularProgressIndicator(),);
+  }
+
+  Widget _showDate(AppDataModel model)
+  {
+    return ButtonBar(
+      alignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+            icon: Icon(Icons.arrow_back_rounded),
+            onPressed: () {}
+        ),
+
+        SizedBox(width: 20,),
+        TextButton(
+          child: Text(DateFormat.dateToString(widget.currentDate)),
+          onPressed: () async {
+            DateTime time = await _selectDate(context);
+            if(time != null)
+            {
+              setState(() {
+                widget.currentDate = time;
+              });
+              await model.fetchMealsDate(DateFormat.dateToString(widget.currentDate));
+            }
+          },
+        ),
+        SizedBox(width: 20,),
+
+        IconButton(
+          icon: Icon(Icons.arrow_forward_rounded),
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
+  Future<DateTime> _selectDate(BuildContext context) async {
+    final DateTime pickedDate = await showDatePicker(
+        context: context,
+        initialDate: widget.currentDate,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2050));
+    if (pickedDate != null && pickedDate != widget.currentDate)
+    {
+      return pickedDate;
+    }
+    return null;
+  }
+
+  Widget _showMealsList(AppDataModel model)
+  {
+    return Expanded(
+      child: ListView.separated(
+        padding: EdgeInsets.all(8),
+        itemCount: model.meals.length,
+        itemBuilder: (BuildContext context, int index)
+        {
+          if(model.meals.isEmpty)
+          {
+            return Center(child: Text('Niente da visualizzare'),);
+          }
+          return MealCard(model.meals.elementAt(index), index, DateFormat.dateToString(widget.currentDate));
+        },
+        separatorBuilder: (BuildContext context, int index) => Divider(),
+      ),
+    );
   }
 }
