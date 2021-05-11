@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:lose/models/Food.dart';
+import 'package:lose/pages/FoodPage.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
+import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class MealListTile extends StatelessWidget
@@ -14,28 +16,28 @@ class MealListTile extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(_food.imagePath),
-      ),
-      title: Text(_food.name),
-      subtitle: Text('${_food.quantity} g'),
-      trailing: _buildDeleteButton(),
-      onTap: () {
-        //TODO
-        //aprire la pagina dei dettagli del cibo selezionato
-      },
+    return ScopedModelDescendant<AppDataModel>(
+        builder: (BuildContext context, Widget widget, AppDataModel model) {
+          return ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(_food.imagePath),
+            ),
+            title: Text(_food.name),
+            subtitle: Text('${_food.quantity} g'),
+            trailing: _buildDeleteButton(model),
+            onTap: () async{
+              //ProductResult res = await model.getProductFromCode(_food.barcode);
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FoodPage(_food, model)));
+            },
+          );
+        }
     );
   }
 
-  Widget _buildDeleteButton() {
-    return ScopedModelDescendant<AppDataModel>(
-        builder: (BuildContext context, Widget widget, AppDataModel model) {
-          return IconButton(
-              icon: Icon(Icons.remove_circle_outline_rounded),
-              onPressed: () => model.removeFood(_mealIndex, _food, _date)
-          );
-        }
+  Widget _buildDeleteButton(AppDataModel model) {
+    return IconButton(
+        icon: Icon(Icons.remove_circle_outline_rounded),
+        onPressed: () => model.removeFood(_mealIndex, _food, _date)
     );
   }
 }

@@ -17,7 +17,7 @@ class FoodDatabaseManager
     return _instance;
   }
 
-  Future<Food> getFoodFromCode(String barcode) async
+  Future<ProductResult> getProductFromCode(String barcode) async
   {
     ProductQueryConfiguration configurations = ProductQueryConfiguration(
         barcode,
@@ -31,6 +31,13 @@ class FoodDatabaseManager
       print("Error retreiving the product ${res.statusVerbose}");
       return null;
     }
+
+    return res;
+  }
+
+  Future<Food> getFoodFromCode(String barcode) async
+  {
+    ProductResult res = await getProductFromCode(barcode);
 
     String productName = res.product.productName;
     double energy = res.product.nutriments.energyKcal100g;
@@ -51,7 +58,8 @@ class FoodDatabaseManager
       proteins: proteins != null ? proteins : 0,
       carbohydrates: carbohydrates != null ? carbohydrates : 0,
       fats: fats != null ? fats : 0,
-      imagePath: imageUrl != null ? imageUrl : ""
+      imagePath: imageUrl != null ? imageUrl : "",
+      barcode: res.barcode
     );
   }
 }

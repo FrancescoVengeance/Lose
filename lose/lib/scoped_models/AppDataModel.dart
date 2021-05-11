@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Food.dart';
+import 'package:lose/models/FoodDatabaseManager.dart';
 import 'package:lose/models/Meal.dart';
+import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AppDataModel extends Model
@@ -16,7 +18,7 @@ class AppDataModel extends Model
   
   AppDataModel()
   {
-    autologin().then((value) => null);
+    //autologin().then((value) => null);
   }
 
   Future<void> autologin() async
@@ -139,5 +141,31 @@ class AppDataModel extends Model
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  Future<Food> getFoodFromCode(String barcode) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    Food f = await FoodDatabaseManager.getInstance().getFoodFromCode(barcode);
+
+    _isLoading = false;
+    notifyListeners();
+
+    return f;
+  }
+
+  Future<ProductResult> getProductFromCode(String barcode) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    ProductResult res = await FoodDatabaseManager.getInstance().getProductFromCode(barcode);
+
+    _isLoading = false;
+    notifyListeners();
+    print("RISULTATO ${res.barcode}");
+    return res;
   }
 }

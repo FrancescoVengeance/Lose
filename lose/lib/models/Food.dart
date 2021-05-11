@@ -15,6 +15,7 @@ class Food
   String imagePath;
   String _id;
   double _quantity = 100;
+  final String barcode;
 
   List<String> _attributes = List.empty(growable: true);
 
@@ -22,7 +23,7 @@ class Food
 
   Food({
     this.name = '', this.kCal = 0, this.fats = 0, this.carbohydrates = 0, this.proteins = 0,
-    this.salt = 0, this.calcium = 0, this.fibers = 0, this.imagePath = '',
+    this.salt = 0, this.calcium = 0, this.fibers = 0, this.imagePath = '', this.barcode
   }){
     _attributes.add("Nome $name");
     _attributes.add("Energia $kCal Kcal");
@@ -67,7 +68,8 @@ class Food
       'calcium' : calcium,
       'fibers' : fibers,
       'imagePath' : imagePath,
-      'quantity' : _quantity
+      'quantity' : _quantity,
+      'barcode': barcode
     };
   }
 

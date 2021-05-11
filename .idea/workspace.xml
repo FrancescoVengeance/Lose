@@ -19,18 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real.">
-      <change afterPath="$PROJECT_DIR$/lose/lib/models/DateFormat.dart" afterDir="false" />
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added DateTimePicker to select the day of the Meal.&#10;&#10;Changed database model to user/date/meals/.&#10;Changed BarCodePicker.dart, now you can select food quantity and it updates itself automatically showing the stats.&#10;Bugfix and improvements.">
+      <change afterPath="$PROJECT_DIR$/lose/lib/pages/FoodPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,19 +88,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lose/lib/main.dart" />
       <method v="2" />
@@ -139,7 +122,10 @@
       <workItem from="1620489090999" duration="11396000" />
       <workItem from="1620555997664" duration="13622000" />
       <workItem from="1620629143533" duration="4749000" />
-      <workItem from="1620644618470" duration="11042000" />
+      <workItem from="1620644618470" duration="11717000" />
+      <workItem from="1620668254578" duration="444000" />
+      <workItem from="1620717089350" duration="5569000" />
+      <workItem from="1620741628343" duration="9929000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -218,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620589169407</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added DateTimePicker to select the day of the Meal.&#10;&#10;Changed database model to user/date/meals/.&#10;Changed BarCodePicker.dart, now you can select food quantity and it updates itself automatically showing the stats.&#10;Bugfix and improvements.">
+      <created>1620666510178</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1620666510178</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +241,7 @@
     <MESSAGE value="Full working Authentication.&#10;&#10;Bugfix and improvements. Fixed an issue with CircularProgressBar in HomePage.dart. Added login method to DatabaseManager.dart." />
     <MESSAGE value="Added BarCodeScanner to get food codes. &#10;&#10;Bugfix and improvements" />
     <MESSAGE value="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real." />
+    <MESSAGE value="Added DateTimePicker to select the day of the Meal.&#10;&#10;Changed database model to user/date/meals/.&#10;Changed BarCodePicker.dart, now you can select food quantity and it updates itself automatically showing the stats.&#10;Bugfix and improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added DateTimePicker to select the day of the Meal.&#10;&#10;Changed database model to user/date/meals/.&#10;Changed BarCodePicker.dart, now you can select food quantity and it updates itself automatically showing the stats.&#10;Bugfix and improvements." />
   </component>
 </project>

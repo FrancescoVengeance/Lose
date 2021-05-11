@@ -138,10 +138,12 @@ class DatabaseManager
         double fibers = double.parse(value[key]['fibers'].toString());
         String imagePath = value[key]['imagePath'].toString();
         double quantity = double.parse(value[key]['quantity'].toString());
+        String barcode = value[key]['barcode'].toString();
         print("ENTRATO $quantity");
 
         Food temp = Food(name:name, kCal: kCal, fats: fats, carbohydrates: carbohydrates,
-            proteins: proteins, salt: salt, calcium: calcium, fibers: fibers, imagePath: imagePath
+            proteins: proteins, salt: salt, calcium: calcium, fibers: fibers, imagePath: imagePath,
+            barcode: barcode
         );
         temp.setId(key.toString());
         temp.setQuantity(quantity);

@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp>
       }
       else
       {
-        //await model.autologin();
+        await model.autologin();
         setState(() {
           print('User logged');
           _isLogged = true;
