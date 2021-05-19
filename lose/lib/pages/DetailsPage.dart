@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 import 'package:lose/widgets/MealListTile.dart';

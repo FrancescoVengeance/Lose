@@ -1,5 +1,8 @@
+import 'package:flutter/services.dart';
 import 'package:lose/models/Food.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
+import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
+import 'package:openfoodfacts/model/parameter/TagFilter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 
 class FoodDatabaseManager
@@ -38,29 +41,69 @@ class FoodDatabaseManager
   Future<Food> getFoodFromCode(String barcode) async
   {
     ProductResult res = await getProductFromCode(barcode);
+    return _buildFood(res.product);
+  }
 
-    String productName = res.product.productName;
-    double energy = res.product.nutriments.energyKcal100g;
-    double fats = res.product.nutriments.fat;
-    double carbohydrates = res.product.nutriments.carbohydrates;
-    double proteins = res.product.nutriments.proteins;
-    double salt = res.product.nutriments.salt;
-    double calcium = res.product.nutriments.calcium;
-    double fibers = res.product.nutriments.fiber;
-    String imageUrl = res.product.imageFrontUrl;
+  Food _buildFood(Product product)
+  {
+    String productName = product.productName;
+    double energy = product.nutriments.energyKcal100g;
+    double fats = product.nutriments.fat;
+    double carbohydrates = product.nutriments.carbohydrates;
+    double proteins = product.nutriments.proteins;
+    double salt = product.nutriments.salt;
+    double calcium = product.nutriments.calcium;
+    double fibers = product.nutriments.fiber;
+    String imageUrl = product.imageFrontUrl;
 
     return Food(
-      name: productName != null ? productName : "",
-      kCal: energy != null ? energy : 0,
-      fibers: fibers != null ? fibers : 0,
-      calcium: calcium != null ? calcium : 0,
-      salt: salt != null ? salt : 0,
-      proteins: proteins != null ? proteins : 0,
-      carbohydrates: carbohydrates != null ? carbohydrates : 0,
-      fats: fats != null ? fats : 0,
-      imagePath: imageUrl != null ? imageUrl : "",
-      barcode: res.barcode
+        name: productName != null ? productName : "",
+        kCal: energy != null ? energy : 0,
+        fibers: fibers != null ? fibers : 0,
+        calcium: calcium != null ? calcium : 0,
+        salt: salt != null ? salt : 0,
+        proteins: proteins != null ? proteins : 0,
+        carbohydrates: carbohydrates != null ? carbohydrates : 0,
+        fats: fats != null ? fats : 0,
+        imagePath: imageUrl != null ? imageUrl : "",
+        barcode: product.barcode
     );
+  }
+
+  Future<List<Food>> searchFood(String keyWords) async
+  {
+    print("STAI CERCANDO ${keyWords.split(" ")}");
+    var parameters = <Parameter>[
+      OutputFormat(format: Format.JSON),
+      Page(page: 2),
+      PageSize(size: 10),
+      SearchSimple(active: true),
+      SortBy(option: SortOption.PRODUCT_NAME),
+      SearchTerms(terms: keyWords.split(" ")),
+      TagFilter(tagType: "languages", contains: true, tagName: "italian"),
+    ];
+
+    ProductSearchQueryConfiguration configuration = ProductSearchQueryConfiguration(
+      parametersList: parameters,
+      fields: [ProductField.ALL],
+      language: OpenFoodFactsLanguage.ITALIAN,
+    );
+
+    try
+    {
+      SearchResult result = await OpenFoodAPIClient.searchProducts(TestConstants.TEST_USER, configuration);
+      List<Food> foods = List.empty(growable: true);
+      for(Product p in result.products)
+      {
+        foods.add(_buildFood(p));
+      }
+      return foods;
+    }
+    catch(error)
+    {
+      print("ERRORE NELLA RICERCA $error");
+      return null;
+    }
   }
 }
 

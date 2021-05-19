@@ -24,7 +24,7 @@ class MealListTile extends StatelessWidget
             ),
             title: Text(_food.name),
             subtitle: Text('${_food.quantity} g'),
-            trailing: _buildDeleteButton(model),
+            trailing: _mealIndex != null ?_buildDeleteButton(model) : IconButton(icon: Icon(Icons.add_circle_outline_rounded), onPressed: (){}),
             onTap: () async{
               //ProductResult res = await model.getProductFromCode(_food.barcode);
               Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FoodPage(_food, model)));

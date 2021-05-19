@@ -4,6 +4,7 @@ import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/FoodDatabaseManager.dart';
 import 'package:lose/models/Meal.dart';
+import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/model/ProductResult.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -167,5 +168,17 @@ class AppDataModel extends Model
     notifyListeners();
     print("RISULTATO ${res.barcode}");
     return res;
+  }
+
+  Future<List<Food>> searchProduct(String keyWords) async
+  {
+    _isLoading = true;
+    notifyListeners();
+
+    List<Food> products = await FoodDatabaseManager.getInstance().searchFood(keyWords);
+
+    _isLoading = false;
+    notifyListeners();
+    return products;
   }
 }

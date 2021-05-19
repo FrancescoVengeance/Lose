@@ -1,10 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/FoodDatabaseManager.dart';
 import 'package:lose/models/Meal.dart';
+import 'package:lose/pages/SearchPage.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 
 class BarCodePicker extends StatefulWidget
@@ -75,7 +74,7 @@ class _BarCodePickerState extends State<BarCodePicker>
             ElevatedButton(
                 child: Icon(Icons.search_outlined),
                 onPressed: () {
-
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SearchPage()));
                 }
             )
           ],

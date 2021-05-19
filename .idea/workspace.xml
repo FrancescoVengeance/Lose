@@ -20,14 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added DateTimePicker to select the day of the Meal.&#10;&#10;Changed database model to user/date/meals/.&#10;Changed BarCodePicker.dart, now you can select food quantity and it updates itself automatically showing the stats.&#10;Bugfix and improvements.">
-      <change afterPath="$PROJECT_DIR$/lose/lib/pages/FoodPage.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lose/lib/pages/SearchPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/DatabaseManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/Food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Food.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/scoped_models/AppDataModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealListTile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/lose/pubspec.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +76,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Android Logcat" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -126,6 +128,15 @@
       <workItem from="1620668254578" duration="444000" />
       <workItem from="1620717089350" duration="5569000" />
       <workItem from="1620741628343" duration="9929000" />
+      <workItem from="1620988129887" duration="152000" />
+      <workItem from="1620988283362" duration="81000" />
+      <workItem from="1620988446454" duration="195000" />
+      <workItem from="1621005769942" duration="938000" />
+      <workItem from="1621088461793" duration="599000" />
+      <workItem from="1621239668726" duration="5707000" />
+      <workItem from="1621328323160" duration="639000" />
+      <workItem from="1621410636266" duration="2511000" />
+      <workItem from="1621437198956" duration="10275000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
