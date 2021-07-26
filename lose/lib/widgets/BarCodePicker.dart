@@ -3,7 +3,6 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:lose/models/Food.dart';
 import 'package:lose/models/FoodDatabaseManager.dart';
 import 'package:lose/models/Meal.dart';
-import 'package:lose/pages/SearchPage.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
 
 class BarCodePicker extends StatefulWidget
@@ -23,6 +22,8 @@ class _BarCodePickerState extends State<BarCodePicker>
 {
   String code;
   Food _pickedFood;
+  bool _searchFood = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   double _weight = 100; //in grammi
   @override
   void initState()
@@ -36,7 +37,7 @@ class _BarCodePickerState extends State<BarCodePicker>
     double height = MediaQuery.of(context).size.height * (2/3);
 
     return Container(
-      height: code == null ? 120 : height,
+      height: code == null && !_searchFood ? 120 : height,
       child: Column(
         children: [
           Icon(Icons.arrow_drop_down),
@@ -48,7 +49,7 @@ class _BarCodePickerState extends State<BarCodePicker>
 
   Widget _pickFood()
   {
-    return Row(
+    return !_searchFood ? Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ButtonBar(
@@ -74,13 +75,16 @@ class _BarCodePickerState extends State<BarCodePicker>
             ElevatedButton(
                 child: Icon(Icons.search_outlined),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SearchPage()));
+                  //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SearchPage()));
+                  setState(() {
+                    _searchFood = true;
+                  });
                 }
             )
           ],
         )
       ],
-    );
+    ) : _searchFoodByBarcode();
   }
 
   Widget _showPickedFood()
@@ -177,6 +181,7 @@ class _BarCodePickerState extends State<BarCodePicker>
                        setState(() {
                          code = null;
                          _pickedFood = null;
+                         _searchFood = false;
                        });
                       }
                   ),
@@ -203,6 +208,52 @@ class _BarCodePickerState extends State<BarCodePicker>
   {
     return FlutterBarcodeScanner.scanBarcode(
         '#ff6666', 'Cancel', true, ScanMode.BARCODE
+    );
+  }
+
+  Widget _searchFoodByBarcode()
+  {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Barcode",
+                    filled: true,
+                    fillColor: Colors.white
+                  ),
+                  keyboardType: TextInputType.number,
+                  /*validator: (String value) async {
+                    Food food = await FoodDatabaseManager.getInstance().getFoodFromCode(value);
+                    return food != null ? null : "Codice non valido";
+                  },*/
+                  onSaved: (String value) async {
+                    _pickedFood = await FoodDatabaseManager.getInstance().getFoodFromCode(value);
+                    if(_pickedFood != null)
+                       {
+                         setState(() {
+                           code = value;
+                           _searchFood = false;
+                         });
+                       }
+                  },
+                ),
+                SizedBox(height: 20,),
+                MaterialButton(
+                    child: Text("Cerca"),
+                    onPressed: () {
+                      _formKey.currentState.save();
+                    })
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

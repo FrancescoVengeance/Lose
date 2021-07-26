@@ -41,7 +41,7 @@ class FoodDatabaseManager
   Future<Food> getFoodFromCode(String barcode) async
   {
     ProductResult res = await getProductFromCode(barcode);
-    return _buildFood(res.product);
+    return res != null ?_buildFood(res.product) : null;
   }
 
   Food _buildFood(Product product)
