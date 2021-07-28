@@ -1,7 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
+import 'package:lose/widgets/BarCodePicker.dart';
 import 'package:lose/widgets/MealListTile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -43,7 +43,13 @@ class DetailsPage extends StatelessWidget
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () {
-                model.addFood(_mealIndex, Meal.random.elementAt(Random().nextInt(Meal.random.length -1)));
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context){
+                      return BarCodePicker(model, _mealIndex);
+                    }
+                );
+                //model.addFood(_mealIndex, Meal.random.elementAt(Random().nextInt(Meal.random.length -1)));
               },
             ),
           );

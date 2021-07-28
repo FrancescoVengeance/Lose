@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,10 +22,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Added SearchPage.dart and search method to FoodDatabaseManager.dart&#10;&#10;Bugfix and improvements.">
+    <list default="true" id="7e68d77f-4294-45b4-8e79-79eff6a7322e" name="Default Changelist" comment="Bugfix and improvements&#10;&#10;Added searching by barcode in the bottomSheet,&#10;have to fix control of unvalid barcode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/FoodDatabaseManager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/BarCodePicker.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/models/Meal.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/models/Meal.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/DetailsPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/pages/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lose/lib/widgets/MealCard.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +74,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -142,7 +147,10 @@
       <workItem from="1621410636266" duration="2511000" />
       <workItem from="1621437198956" duration="10365000" />
       <workItem from="1626550247568" duration="792000" />
-      <workItem from="1627312364109" duration="10359000" />
+      <workItem from="1627312364109" duration="11087000" />
+      <workItem from="1627427780866" duration="59000" />
+      <workItem from="1627481787269" duration="134000" />
+      <workItem from="1627481982220" duration="2122000" />
     </task>
     <task id="LOCAL-00001" summary="Added MealCard.dart">
       <created>1619977924260</created>
@@ -235,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621449008734</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Bugfix and improvements&#10;&#10;Added searching by barcode in the bottomSheet,&#10;have to fix control of unvalid barcode">
+      <created>1627322935167</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1627322935167</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +282,7 @@
     <MESSAGE value="Added FoodDatabaseManager.dart to pick foods.&#10;&#10;Bugfix and improvements. Now picked food are real." />
     <MESSAGE value="Added DateTimePicker to select the day of the Meal.&#10;&#10;Changed database model to user/date/meals/.&#10;Changed BarCodePicker.dart, now you can select food quantity and it updates itself automatically showing the stats.&#10;Bugfix and improvements." />
     <MESSAGE value="Added SearchPage.dart and search method to FoodDatabaseManager.dart&#10;&#10;Bugfix and improvements." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added SearchPage.dart and search method to FoodDatabaseManager.dart&#10;&#10;Bugfix and improvements." />
+    <MESSAGE value="Bugfix and improvements&#10;&#10;Added searching by barcode in the bottomSheet,&#10;have to fix control of unvalid barcode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugfix and improvements&#10;&#10;Added searching by barcode in the bottomSheet,&#10;have to fix control of unvalid barcode" />
   </component>
 </project>

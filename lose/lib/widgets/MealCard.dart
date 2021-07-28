@@ -1,11 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:lose/models/DateFormat.dart';
-import 'package:lose/models/Food.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/pages/DetailsPage.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
@@ -79,7 +73,7 @@ class MealCard extends StatelessWidget
               Text('Totale'),
               Text('Calorie: ${_meal.totals[Attributes.KCal]} kCal'),
               Text('Grassi: ${_meal.totals[Attributes.Fats]} g'),
-              Text('Acqua: 3l')
+              //Text('Acqua: 3l')
             ],
           ),
         ),

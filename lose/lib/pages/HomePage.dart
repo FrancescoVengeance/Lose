@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lose/models/DatabaseManager.dart';
 import 'package:lose/models/DateFormat.dart';
 import 'package:lose/models/Meal.dart';
 import 'package:lose/scoped_models/AppDataModel.dart';
@@ -19,6 +18,8 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
+  double _totalDayCalories = 0;
+
   @override
   void initState()
   {
@@ -37,6 +38,8 @@ class _HomePageState extends State<HomePage>
             body: model.isLoading ? _loading() : Column(
               children: [
                 _showDate(model),
+                Text("Calorie totali $_totalDayCalories"),
+                Divider(),
                 _showMealsList(model),
               ],
             ),
@@ -68,13 +71,13 @@ class _HomePageState extends State<HomePage>
                 backgroundImage: NetworkImage(userImage),),
             ),
           ),
-          ListTile(
+          /*ListTile(
             title: Text('Opzioni'),
             trailing: Icon(Icons.settings),
             onTap: () {
               //TODO
             },
-          ),
+          ),*/
           Divider(),
           ListTile(
             title: Text('Logout'),
@@ -184,10 +187,10 @@ class _HomePageState extends State<HomePage>
     return ButtonBar(
       alignment: MainAxisAlignment.center,
       children: [
-        IconButton(
+        /*IconButton(
             icon: Icon(Icons.arrow_back_rounded),
             onPressed: () {}
-        ),
+        ),*/
 
         SizedBox(width: 20,),
         TextButton(
@@ -200,15 +203,19 @@ class _HomePageState extends State<HomePage>
                 widget.currentDate = time;
               });
               await model.fetchMealsDate(DateFormat.dateToString(widget.currentDate));
+              for(Meal m in model.meals)
+              {
+                _totalDayCalories += m.totals[Attributes.KCal];
+              }
             }
           },
         ),
         SizedBox(width: 20,),
 
-        IconButton(
+        /*IconButton(
           icon: Icon(Icons.arrow_forward_rounded),
           onPressed: () {},
-        ),
+        ),*/
       ],
     );
   }

@@ -1,6 +1,4 @@
 import 'dart:math';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
 import 'package:lose/models/Food.dart';
 
 class Meal
@@ -8,17 +6,6 @@ class Meal
   String _mealType;
   List<Food> _foods = List.empty(growable: true);
   String _id;
-
-  static final List<Food> random = [
-    Food(name: 'Pisellone', fats: 10, kCal: 1500, fibers: 10, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Pisellino', fats: 5, kCal: 500, calcium: 0.2, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Piselluccio', fats: 12.2, salt: 1.2, kCal: 1000.5, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Pisellaccio', fats: 20.4, kCal: 1000.5, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Piselletto', fats: 2.33, kCal: 1000.5, carbohydrates: 32, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Pisellotto', fats: 1, kCal: 1000.5, proteins: 30, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Pisellano', fats: 4, kCal: 1000.5, carbohydrates: 90, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-    Food(name: 'Piselluccino', fats: 9.5, kCal: 1000.5, salt: 0.9, imagePath: 'https://shop.rossolimone.com/1432-large_default/dildo-con-ventosa-5-romeo.jpg'),
-  ];
 
   final Map<Attributes, double> totals = {
     Attributes.KCal : 0,
